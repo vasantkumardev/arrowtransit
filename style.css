@@ -1,0 +1,292 @@
+/*
+COLORS:
+dark orange:#e47200
+light orange:#f3b98b
+light pink:#ffd5d5
+dark grey:#696969
+light grey:#c3c3c3
+defualt orange: #E57300
+
+*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size:62.5%;
+}
+body{
+    font-family: 'Work Sans','PT Sans', sans-serif;    
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color:#777;
+}
+.container{
+    max-width: 114rem;
+    margin: 0 auto;
+    
+}
+
+.logo{
+    /* margin: 2rem; */
+    padding-top: 2rem;
+}
+.logo img{
+    height: 6.2rem;
+    /* background-color: #f4f4f4; */
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+  }
+
+
+  /* Dropdown button */
+.dropdown .dropbtn {
+    padding: 1.2rem;
+    margin-right: 1.2rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.10rem;
+    font-size: 1.2rem;
+    font-weight:normal;
+    color: black;
+    border: 2px solid #f4f4f4;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    background-color: white;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 14rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  /* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Add a grey background color to dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color:#E57300 !important;
+    color: #f4f4f4 !important;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+.slider{
+    margin-bottom: 3rem;
+}
+.nav-main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-end;
+    align-items:center;
+
+    width:40em;
+    /* background-color:#f4f4f4; */
+}
+.navlink{
+ padding: 1rem;
+ margin-right: 1.2rem;
+ text-transform: uppercase;
+ text-decoration: none;
+ letter-spacing: 0.10rem;
+ font-size: 1.2rem;
+ font-weight:normal;
+ color: black;
+ border: 2px solid #f4f4f4;
+ /* border-radius: 10px; */
+}
+
+.nav-main a:hover{
+    background-color:#E57300;
+    color: #f4f4f4;
+    
+}
+
+.nav-active{
+    background-color:#E57300;
+    color: whitesmoke !important;
+}
+
+.main-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 3rem;
+    
+}
+.main-items{
+    font-family: 'Work Sans', sans-serif;
+    border: 2px solid #f4f4f4;
+    padding: 5rem;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+    color: black;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width:30rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.main-items img{
+    /* padding: 1rem;
+    margin-left: 1.3rem; */
+   width:128px;
+   height:128px;
+}
+
+.main-items h2{
+    font-family: 'PT Sans';
+    
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 2rem;
+    /* letter-spacing: 0.2rem; */
+}
+
+.footer-main{
+    background-color:black;
+    /* border-radius: 10px; */
+    /* margin-bottom:2rem; */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.footer-content{
+    color:white;
+}
+
+.footer-content--social{
+    padding: 1rem;
+    text-align: center;
+    color:black;
+    background-color: #f4f4f4;
+}
+.footer-main p{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #f4f4f4;
+}
+
+.footer-copy{
+    color: #E57300;
+}
+
+.banner-sub {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.text-center {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    padding: 1rem;
+    background:#E57300; /* Fallback color */
+    background: rgba(255, 255, 255, 0.801); /* Black background with 0.5 opacity */
+    color:black; /* Grey text */
+    width: 100%; /* Full width */
+}
+
+.main-content{
+    max-width:95rem;
+    margin:0 auto;
+    padding-top:2rem;
+}
+
+.main-content h1{
+    font-family: "PT Sans";
+    text-transform: uppercase;
+    color: black;
+    padding:2rem 0;
+    font-size: 2.6rem;
+}
+
+.main-content p{
+    padding-bottom: 2rem;
+    color: black;
+}
+
+.consult-grid{
+    max-width: 95rem;
+    margin:0 auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: #f4f4f4;
+    margin-bottom: 5rem;
+
+
+}
+.consult-grid--item{
+    min-width: 250px;
+    font-family: "PT Sans";
+    font-weight: 600;
+    font-size:1.6rem;
+    flex-basis: 10rem;
+    padding: 2rem;
+}
+ .main-content--float{
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+ }
+
+ .main-content--float img{
+     padding:2rem;
+ }
+
+ .main-content-open{
+    max-width:95rem;
+    margin:0 auto;
+    padding-top:2rem;
+}
+
+.main-content-open h1{
+    font-family: "PT Sans";
+    text-transform: uppercase;
+    color: black;
+    padding:2rem 0;
+    font-size: 2.6rem;
+}
+
+.main-content-open li, p{
+    padding-bottom: 2rem;
+    color:black;
+}
+
