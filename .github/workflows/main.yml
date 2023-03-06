@@ -13,11 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create Pull Request
-        uses: mhristof/actions-gh@v1.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: repo-sync/pull-request@v2
         with:
-          args: "pr create -B master -H staging --title 'Merge Staging to master' --body 'Created by GitHub Action'"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          base_branch: master
+          head_branch: staging
+          title: "Merge Staging to Master"
+          body: "Created by GitHub Action"
