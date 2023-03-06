@@ -15,12 +15,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: 'staging'
+      - name: Set Git config
+        run: |
+          git config --global user.name "vasantkumardev"
+          git config --global user.email "vasant84kumar@gmail.com"
       - name: Merge staging to AutoMergeStagingToMaster
         run: |
           git checkout master
-          git merge --no-commit --no-ff staging
-	  git checkout -b AutoMergeStagingToMaster
-	  git commit -m "Merge staging to AutoMergeStagingToMaster"
+          git merge --no-ff staging
+          git checkout -b AutoMergeStagingToMaster
+          git commit -m "Merge staging to AutoMergeStagingToMaster"
       - name: Push changes to AutoMergeStagingToMaster
         uses: ad-m/github-push-action@master
         with:
