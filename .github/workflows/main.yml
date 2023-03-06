@@ -20,6 +20,17 @@ jobs:
       - name: Update Author information
         run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
       
+      - name: Check out staging branch
+        uses: actions/checkout@v2
+        with:
+          ref: refs/heads/staging
+      
+      - name: Pull changes from master branch
+        run: git pull origin master
+      
+      - name: Check that there are changes to merge
+        run: git diff --name-only master..HEAD
+      
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
