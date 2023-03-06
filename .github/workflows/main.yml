@@ -1,0 +1,36 @@
+name: Auto-merge staging to master
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - staging
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'staging'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: 'staging'
+      - name: Merge staging to AutoMergeStagingToMaster
+        run: |
+          git checkout -b AutoMergeStagingToMaster
+          git merge --no-commit --no-ff staging
+          git commit -m "Merge staging to AutoMergeStagingToMaster"
+      - name: Push changes to AutoMergeStagingToMaster
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_ACTIONS }}
+          branch: AutoMergeStagingToMaster
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: 'Merge AutoMergeStagingToMaster into master'
+          body: 'Automatically created pull request to merge branch AutoMergeStagingToMaster into master'
+          head-branch: 'AutoMergeStagingToMaster'
+          base: 'master'
+          delete-branch: false
+          commit-message: 'Automatically merged commits from pull request #${{ github.event.pull_request.number }}'
