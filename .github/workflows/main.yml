@@ -1,4 +1,4 @@
-name: Auto-merge staging to master
+name: Auto-create pull request on merge to staging
 
 on:
   pull_request:
@@ -15,26 +15,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: 'staging'
+
       - name: Set Git config
         run: |
           git config --global user.name "vasantkumardev"
           git config --global user.email "vasant84kumar@gmail.com"
-      - name: Merge staging to AutoMergeStagingToMaster
-        run: |
-          git checkout -b AutoMergeStagingToMaster
-          git merge --no-ff staging
-          git commit -m "Merge staging to AutoMergeStagingToMaster"
-      - name: Push changes to AutoMergeStagingToMaster
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GH_ACTIONS }}
-          branch: AutoMergeStagingToMaster
-      - name: Create Pull Request
+
+      - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
-          title: 'Merge AutoMergeStagingToMaster into master'
-          body: 'Automatically created pull request to merge branch AutoMergeStagingToMaster into master'
-          head-branch: 'AutoMergeStagingToMaster'
+          title: 'Merge staging into master'
+          body: 'Automatically created pull request to merge branch staging into master'
+          head: 'staging'
           base: 'master'
-          delete-branch: true
-          commit-message: 'Automatically merged commits from pull request #${{ github.event.pull_request.number }}'
+          delete-branch: false
