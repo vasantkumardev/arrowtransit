@@ -1,7 +1,8 @@
 name: Auto-create pull request on merge
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - staging
 
