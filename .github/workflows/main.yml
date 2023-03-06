@@ -1,32 +1,43 @@
-name: Auto-create pull request on merge to staging
+name: Compare and Merge Staging to Master
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - staging
 
 jobs:
-  create-pr:
+  compare-and-merge:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'staging'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           ref: 'staging'
-
+          
       - name: Set Git config
         run: |
           git config --global user.name "vasantkumardev"
           git config --global user.email "vasant84kumar@gmail.com"
-
+          
+      - name: Compare staging to master
+        id: compare
+        run: |
+          git fetch origin master
+          git diff --name-only origin/master..HEAD > changes.txt
+          echo "::set-output name=changes::$(cat changes.txt)"
+          
+      - name: Create merge branch
+        run: |
+          git checkout -b merge-staging-to-master
+          cat changes.txt | xargs git add
+          git commit -m "Merge changes from staging to master"
+          git push origin merge-staging-to-master
+          
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
           title: 'Merge staging into master'
-          body: 'Automatically created pull request to merge branch staging into master'
-          head: ${{ github.head_ref }}
+          body: 'Automatically created pull request to merge changes from staging branch into master'
+          head: 'merge-staging-to-master'
           base: 'master'
-          delete-branch: false
-
+          delete-branch: flase
