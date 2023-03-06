@@ -17,10 +17,10 @@ jobs:
           ref: 'staging'
       - name: Merge staging to AutoMergeStagingToMaster
         run: |
-          git checkout -b master
+          git checkout master
           git merge --no-commit --no-ff staging
-	  git checkout -b AutoMergeStagingToMaster 	
-          git commit -m "Merge staging to AutoMergeStagingToMaster"
+	  git checkout -b AutoMergeStagingToMaster
+	  git commit -m "Merge staging to AutoMergeStagingToMaster"
       - name: Push changes to AutoMergeStagingToMaster
         uses: ad-m/github-push-action@master
         with:
@@ -33,5 +33,5 @@ jobs:
           body: 'Automatically created pull request to merge branch AutoMergeStagingToMaster into master'
           head-branch: 'AutoMergeStagingToMaster'
           base: 'master'
-          delete-branch: false
+          delete-branch: true
           commit-message: 'Automatically merged commits from pull request #${{ github.event.pull_request.number }}'
