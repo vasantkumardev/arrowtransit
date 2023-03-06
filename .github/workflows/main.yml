@@ -33,3 +33,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           delete-branch: true
           
+          # Include changes from staging branch in new PR
+          mergeMethod: merge
+          mergeState: clean
+          destinationBranch: master
