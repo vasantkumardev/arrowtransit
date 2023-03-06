@@ -26,6 +26,7 @@ jobs:
         with:
           title: 'Merge staging into master'
           body: 'Automatically created pull request to merge branch staging into master'
-          head: 'staging'
+          head: ${{ github.head_ref }}
           base: 'master'
           delete-branch: false
+
