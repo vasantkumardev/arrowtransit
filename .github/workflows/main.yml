@@ -1,25 +1,34 @@
 name: Auto-create pull request on merge
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - staging
 
 jobs:
-  create-pr:
+  AutoMergeStagingToMaster:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      
+      - name: Get branch committed data
+        uses: rlespinasse/git-commit-data-action@v1.x
+      
+      - name: Update Author information
+        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+      
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
-          title: 'New feature added'
-          body: 'Automatically created pull request for new feature'
-          labels: 'auto-generated'
-          branch: '${{ github.event.pull_request.head.ref }}'
-          base: 'master'
-          token: ${{ secrets.	GITHUB_TOKEN }}
+          branch: "AutoMergeStagingToMaster"
+          base: master
+          title: "Auto PR to Merge Staging to Master"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
+          body: |
+            This is a PR to Auto Merge Staging to Master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
+          
