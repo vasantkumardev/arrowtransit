@@ -13,39 +13,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      - name: Get branch committed data
-        uses: rlespinasse/git-commit-data-action@v1.x
-      
-      - name: Update Author information
-        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
-      
-      - name: Check out staging branch
-        uses: actions/checkout@v2
-        with:
-          ref: refs/heads/staging
-      - name: set global
-        run: git config --global pull.ff true
-      - name: Pull changes from master branch
-        run: git pull origin master
-      
-      - name: Check that there are changes to merge
-        run: git diff --name-only master..HEAD
-      
+           
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
           branch: "AutoMergeStagingToMaster"
           base: master
           title: "Auto PR to Merge Staging to Master"
-          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
-          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
           body: |
             This is a PR to Auto Merge Staging to Master
           token: ${{ secrets.GITHUB_TOKEN }}
           delete-branch: true
-          
-          # Include changes from staging branch in new PR
-          mergeMethod: merge
-          mergeState: clean
-          destinationBranch: master
