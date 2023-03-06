@@ -1,3 +1,5 @@
+name: My Workflow
+
 on:
   pull_request:
     branches:
@@ -10,7 +12,12 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: create pull request
-        run: gh pr create -B master -H staging --title 'Merge Staging to master ' --body 'Created by Github action'
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        uses: mhristof/actions-gh@v1.4.0
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: "pr create -B master -H staging --title 'Merge Staging to master' --body 'Created by GitHub Action'"
