@@ -16,8 +16,10 @@ jobs:
         with:
           ref: 'staging'
       - name: Merge staging to AutoMergeStagingToMaster
-        run: | 
-          git merge --no-commit --no-ff staging AutoMergeStagingToMaster
+        run: |
+          git checkout -b master
+          git merge --no-commit --no-ff staging
+	        git checkout -b AutoMergeStagingToMaster 	
           git commit -m "Merge staging to AutoMergeStagingToMaster"
       - name: Push changes to AutoMergeStagingToMaster
         uses: ad-m/github-push-action@master
