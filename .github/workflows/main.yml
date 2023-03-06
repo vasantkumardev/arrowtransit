@@ -22,4 +22,4 @@ jobs:
           labels: 'auto-generated'
           branch: '${{ github.event.pull_request.head.ref }}'
           base: 'master'
-          token: ${{ secrets.GH_ACTIONS }}
+          token: ${{ secrets.	GITHUB_TOKEN }}
